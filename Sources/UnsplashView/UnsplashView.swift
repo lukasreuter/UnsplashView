@@ -3,13 +3,13 @@ import URLImage
 
 public struct UnsplashView: View {
 
-    var source: UnsplashSource
+    private var source: UnsplashSource
 
     public init(_ terms: String...) {
         source = UnsplashSource(scope: .none, time: .all, size: .init(width: 512, height: 512), terms: terms)
     }
 
-    var body: some View {
+    public var body: some View {
         URLImage(self.source.url, placeholder: { (progressWrapper: DownloadProgressWrapper) in
 
             ProgressView(progressWrapper) { progress in
