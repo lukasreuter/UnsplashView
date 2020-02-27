@@ -5,11 +5,11 @@ public struct UnsplashView: View {
 
     var source: UnsplashSource
 
-    init(_ terms: String...) {
+    public init(_ terms: String...) {
         source = UnsplashSource(scope: .none, time: .all, size: .init(width: 512, height: 512), terms: terms)
     }
 
-    public var body: some View {
+    var body: some View {
         URLImage(self.source.url, placeholder: { (progressWrapper: DownloadProgressWrapper) in
 
             ProgressView(progressWrapper) { progress in
