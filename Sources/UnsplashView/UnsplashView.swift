@@ -5,8 +5,8 @@ public struct UnsplashView: View {
 
     private var source: UnsplashSource
 
-    public init(_ terms: String...) {
-        source = UnsplashSource(scope: .none, time: .all, size: .init(width: 512, height: 512), terms: terms)
+    public init(_ terms: String..., random: Bool = false) {
+        source = UnsplashSource(scope: random ? .random : .none, time: .all, size: .init(width: 512, height: 512), terms: terms)
     }
 
     public var body: some View {

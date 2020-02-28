@@ -16,6 +16,7 @@ public struct UnsplashSource {
         case featured
         case user(String)
         case collection(String)
+        case random
 
         var pathComponents: [String] {
             switch self {
@@ -23,6 +24,7 @@ public struct UnsplashSource {
             case .featured:          return ["featured"     ]
             case .user(let user):    return ["user", user   ]
             case .collection(let v): return ["collection", v]
+            case .random:            return ["random"]
             }
         }
     }
