@@ -1,10 +1,11 @@
-//
-//  UnsplashSource.swift
-//  SwiftWebUI
-//
-//  Created by Helge Heß on 25.06.19.
-//  Copyright © 2019 Helge Heß. All rights reserved.
-//
+///
+///  UnsplashSource.swift
+///  SwiftWebUI
+///
+///  Created by Helge Heß on 25.06.19.
+///  Copyright © 2019 Helge Heß. All rights reserved.
+///
+
 import struct Foundation.URL
 import struct Foundation.URLComponents
 

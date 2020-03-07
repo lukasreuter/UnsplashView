@@ -1,34 +1,27 @@
+///
+///  UnsplashView.swift
+///  UnsplashView
+///
+///  Created by Lukas Reuter on 07.03.20.
+///  Copyright © 2020 Lukas Reuter. All rights reserved.
+
 import SwiftUI
 import URLImage
 
 public struct UnsplashView: View {
 
     private var source: UnsplashSource
+    private var configuration: (Image) -> Image
 
-    public init(_ terms: String..., random: Bool = false) {
-        source = UnsplashSource(scope: random ? .random : .none, time: .all, size: .init(width: 512, height: 512), terms: terms)
+    private let cache = TemporaryImageCache()
+
+    public init(_ terms: String..., random: Bool = false, configuration: @escaping (Image) -> Image = { $0.resizable() }) {
+        self.source = UnsplashSource(scope: random ? .random : .none, time: .all, size: .init(width: 512, height: 512), terms: terms)
+        self.configuration = configuration
     }
 
     public var body: some View {
-        URLImage(self.source.url, placeholder: { (progressWrapper: DownloadProgressWrapper) in
-
-            ProgressView(progressWrapper) { progress in
-                ZStack {
-                    if progress > 0.0 {
-                        // The download has started. CircleProgressView displays the progress.
-                        CircleProgressView(progress).stroke(lineWidth: 8.0)
-                    }
-                    else {
-                        // The download has not yet started. CircleActivityView is animated activity indicator that suits this case.
-                        CircleActivityView().stroke(lineWidth: 50.0)
-                    }
-                }
-            }
-            //.frame(width: 50.0, height: 50.0)
-
-        }) {
-            $0.image.resizable()
-        }
+        AsyncImage(url: self.source.url, cache: self.cache, placeholder: Text("Loading ..."), configuration: self.configuration)
     }
 }
 
